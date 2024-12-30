@@ -1,37 +1,47 @@
 import Lottie from "lottie-react";
-import React from "react";
+import React, { useContext } from "react";
 import registerLottie from "../../assets/lottie/register.json";
+import AuthContext from "../../context/AuthContext";
 
 const Register = () => {
+  const { createUser } = useContext(AuthContext);
 
-    const handleRegister = (e) => {
-        e.preventDefault();
-    
-        const form = e.target;
-        const name = form.name.value;
-        const email = form.email.value;
-        const password = form.password.value;
-        console.log(name, email, password);
-    
-        if(password.length < 6){
-          setErrorMessage('password should be 6 character or more');
-          return;
-        }
+  const handleRegister = (e) => {
+    e.preventDefault();
 
-        // Check for at least one upperCase letter
-        if (!/[A-Z]/.test(password)) {
-          setErrorMessage("Password must include at least one uppercase letter");
-          return;
-        }
-    
-        // Check for at least one lowercase letter
-        if (!/[a-z]/.test(password)) {
-          setErrorMessage("Password must include at least one lowercase letter");
-          return;
-        }
-    
-      }
-    
+    const form = e.target;
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    console.log(name, email, password);
+
+    if (password.length < 6) {
+      setErrorMessage("password should be 6 character or more");
+      return;
+    }
+
+    // Check for at least one upperCase letter
+    if (!/[A-Z]/.test(password)) {
+      setErrorMessage("Password must include at least one uppercase letter");
+      return;
+    }
+
+    // Check for at least one lowercase letter
+    if (!/[a-z]/.test(password)) {
+      setErrorMessage("Password must include at least one lowercase letter");
+      return;
+    }
+
+    //call create user
+    createUser(email, password)
+      .then((result) => {
+        console.log(result.user);
+      })
+      .catch((error) => {
+        console.log(error.message, errorMessage);
+      });
+  };
+
   return (
     <div>
       <div className="hero bg-base-200 min-h-screen">
@@ -46,7 +56,7 @@ const Register = () => {
             <form onSubmit={handleRegister} className="card-body">
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Email</span>
+                  <span className="label-text">Name</span>
                 </label>
                 <input
                   type="name"
