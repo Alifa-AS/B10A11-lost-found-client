@@ -1,10 +1,12 @@
 import Lottie from "lottie-react";
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import registerLottie from "../../assets/lottie/register.json";
 import AuthContext from "../../context/AuthContext";
+import { Link } from "react-router-dom";
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState("")
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -12,8 +14,9 @@ const Register = () => {
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
+    const photo = form.photo.value;
     const password = form.password.value;
-    console.log(name, email, password);
+    console.log(name, email, photo, password);
 
     if (password.length < 6) {
       setErrorMessage("password should be 6 character or more");
@@ -38,7 +41,7 @@ const Register = () => {
         console.log(result.user);
       })
       .catch((error) => {
-        console.log(error.message, errorMessage);
+        console.log(error.message, error);
       });
   };
 
@@ -51,7 +54,7 @@ const Register = () => {
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
             <h1 className="ml-8 mt-4 text-4xl font-bold text-center">
-              Login now!
+             Register now!
             </h1>
             <form onSubmit={handleRegister} className="card-body">
               <div className="form-control">
@@ -80,6 +83,18 @@ const Register = () => {
               </div>
               <div className="form-control">
                 <label className="label">
+                  <span className="label-text">Photo URL</span>
+                </label>
+                <input
+                  type="photo"
+                  placeholder="Photo URL"
+                  name="photo"
+                  className="input input-bordered"
+                  required
+                />
+              </div>
+              <div className="form-control">
+                <label className="label">
                   <span className="label-text">Password</span>
                 </label>
                 <input
@@ -89,16 +104,23 @@ const Register = () => {
                   className="input input-bordered"
                   required
                 />
-                <label className="label">
-                  <a href="#" className="label-text-alt link link-hover">
-                    Forgot password?
-                  </a>
-                </label>
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Login</button>
+                <button className="btn btn-primary">Register</button>
+              </div>
+              <div>
+                <p>
+                  Already have an account?
+                  <Link
+                    to="/login"
+                    className="text-green-500 underline font-bold">
+                    {" "}Login{" "}
+                  </Link>
+                  Now!
+                </p>
               </div>
             </form>
+            
           </div>
         </div>
       </div>
