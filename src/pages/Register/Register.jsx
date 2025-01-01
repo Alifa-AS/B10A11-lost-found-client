@@ -3,10 +3,11 @@ import React, { useContext, useState } from "react";
 import registerLottie from "../../assets/lottie/register.json";
 import AuthContext from "../../context/AuthContext";
 import { Link } from "react-router-dom";
+import SocialLogin from "../shared/SocialLogin";
 
 const Register = () => {
   const { createUser } = useContext(AuthContext);
-  const [errorMessage, setErrorMessage] = useState("")
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -48,13 +49,13 @@ const Register = () => {
   return (
     <div>
       <div className="hero bg-base-200 min-h-screen">
-        <div className="hero-content flex-col lg:flex-row-reverse">
+        <div className="hero-content flex-col lg:flex-row">
           <div className="text-center lg:text-left w-96">
             <Lottie animationData={registerLottie} />
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
             <h1 className="ml-8 mt-4 text-4xl font-bold text-center">
-             Register now!
+              Register now!
             </h1>
             <form onSubmit={handleRegister} className="card-body">
               <div className="form-control">
@@ -106,21 +107,27 @@ const Register = () => {
                 />
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Register</button>
+                <button className="btn bg-[#1c402e] text-white">
+                  Register
+                </button>
               </div>
               <div>
                 <p>
                   Already have an account?
                   <Link
                     to="/login"
-                    className="text-green-500 underline font-bold">
-                    {" "}Login{" "}
+                    className="text-green-500 underline font-bold"
+                  >
+                    {" "}
+                    Login{" "}
                   </Link>
                   Now!
                 </p>
               </div>
             </form>
-            
+            <div className="my-4 mx-6">
+              <SocialLogin />
+            </div>
           </div>
         </div>
       </div>
