@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import img from '../../assets/L&F/1.png';
-import img2 from '../../assets/L&F/2.png';
-import img3 from '../../assets/L&F/3.png';
-import img4 from '../../assets/L&F/4.png';
+import img from '../../assets/L&F/aaa.png';
+import img2 from '../../assets/L&F/bbb.png';
+import img3 from '../../assets/L&F/ccc.png';
+import img4 from '../../assets/L&F/ddd.png';
 
 const Banner = () => {
     const [currentSlide, setCurrentSlide] = useState(1);
@@ -20,7 +20,7 @@ const Banner = () => {
 
     return (
       <div>
-        <div className="carousel w-full h-[500px]">
+        <div className="carousel w-full h-[550px]">
         <div
             id="slide1"
             className={`carousel-item relative w-full ${

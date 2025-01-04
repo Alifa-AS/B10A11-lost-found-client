@@ -24,7 +24,7 @@ const Motion = () => {
           </div>
           <div className="flex-1">
             <motion.h1
-              animate={{ x: 100, color: ["#065505"] }}
+              animate={{ x: 100, color: ["#031e40"] }}
               transition={{
                 duration: 2,
                 delay: 1,
@@ -46,7 +46,7 @@ const Motion = () => {
             <p className="py-6">
             Our intention is still to reunite items lost or found with their respective owners.
             </p>
-            <button className="btn bg-green-950 text-yellow-400">Get Started</button>
+            <button className="btn bg-[#031e40] text-white">Get Started</button>
           </div>
         </div>
       </div>
