@@ -3,13 +3,13 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const LatestItemsCard = ({ item }) => {
-  const {_id, status, title, category, name, email, date, location, thumbnail, description, contact } =
+  const {_id, title, category, name, email, date, location, thumbnail, description, contact, status } =
     item;
 
   return (
-    <div className="card card-compact bg-base-100 shadow-xl">
+    <div className="card card-compact bg-base-100 shadow-xl lg:mx-2 md:mx-5 mx-8">
         <figure className="px-5 pt-5">
-          <img className="w-60 h-36 rounded-xl" 
+          <img className="w-72 h-40 object-cover rounded-xl" 
           src={thumbnail} 
           alt="items" />
         </figure>

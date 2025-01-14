@@ -78,14 +78,14 @@ const Banner = () => {
             <img
             src={img2}
             className="w-full h-full object-cover"
-            alt="Slide 3"
+            alt="Slide 3" 
             />
             <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
             <button
                 onClick={() => setCurrentSlide(2)}
                 className="btn btn-circle"
             >
-                ❮
+                ❮ 
             </button>
             <button onClick={() => setCurrentSlide(4)} className="btn btn-circle">
                 ❯
@@ -103,7 +103,7 @@ const Banner = () => {
             src={img4}
             className="w-full h-full object-cover"
             alt="Slide 4"
-            />
+            /> 
             <div className="absolute left-5 right-5 top-1/2 flex -translate-y-1/2 transform justify-between">
             <button
                 onClick={() => setCurrentSlide(3)}

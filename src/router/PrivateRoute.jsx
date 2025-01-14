@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import AuthContext from '../context/AuthContext';
 import { Navigate, useLocation } from 'react-router-dom';
+import Loading from '../pages/shared/Loading';
 
 const PrivateRoute = ({ children }) => {
 
@@ -9,7 +10,7 @@ const PrivateRoute = ({ children }) => {
     console.log(location);
 
     if(loading){
-        return <span className="loading loading-ring loading-lg"></span>
+        return <Loading />
     }
 
     if(user){
