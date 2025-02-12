@@ -113,7 +113,7 @@ const RecoverForm = () => {
             name="photo"
             className="input input-bordered"
             defaultValue={user?.photoURL || ""}
-           
+            readOnly
           />
         </div>
 

@@ -75,13 +75,13 @@ const ItemDetails = () => {
           <div className="card-actions justify-end">
               {status?.toLowerCase() === "lost" ? (
                 <button onClick={() => document.getElementById("my_modal_5").showModal()}
-                className="btn bg-sky-600 text-white px-4 py-2 rounded-lg shadow-md transition-transform transform hover:scale-105">
-                  Search for
+                className="btn bg-sky-500 text-white px-4 py-2 rounded-lg shadow-md transition-transform transform hover:scale-105">
+                  This is Mine!
                 </button>
               ) : status?.toLowerCase() === "found" ? (
                 <button onClick={() => document.getElementById("my_modal_5").showModal()}
-                className="btn bg-green-500 px-4 py-2 rounded-lg shadow-md transition-transform transform hover:scale-105">
-                  Found this
+                className="btn bg-yellow-500 text-white px-4 py-2 rounded-lg transition-transform transform hover:scale-105">
+                  Found this!
                 </button>
               ) : null}
           </div>

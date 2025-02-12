@@ -10,7 +10,16 @@ const AddPost = () => {
   console.log(id, user);
 
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedImage, setSelectedImage] = useState(null);
   
+  // Image select handler
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file); // create URL for the selected image
+      setSelectedImage(imageUrl);
+    }
+  };
   
   const handleAddItems = (e) => {
     e.preventDefault();
@@ -18,7 +27,14 @@ const AddPost = () => {
     const formData = new FormData(e.target);
     const initialData = Object.fromEntries(formData.entries());
     console.log(initialData);
-    const {title, date, ...newPost} = initialData;
+    const newPost = {
+      ...initialData, 
+      contact: {
+        name: user?.displayName || "Anonymous",
+        email: user?.email || "No Email",
+
+      },
+    }; 
     console.log(newPost);
 
     fetch('http://localhost:5000/items', {
@@ -26,6 +42,7 @@ const AddPost = () => {
       headers: {
         'content-type': 'application/json'
       },
+      
       body: JSON.stringify(newPost)
     })
     .then(res => res.json())
@@ -38,36 +55,13 @@ const AddPost = () => {
           showConfirmButton: false,
           timer: 1500
         });
-        Navigate('/myItems')
+        // Navigate('/myPostedItems')
       }
     })
 
   }
 
 
-
-
-  //   const form = e.target;
-
-  //   const title = form.title.value;
-  //   const category = form.category.value;
-  //   const location = form.location.value;
-  //   const thumbnail = form.thumbnail.value;
-  //   const description = form.description.value;
-  //   const name = user?.displayName || "Anonymous";
-  //   const email = user?.email || "No Email";
-
-  //   const newPost = {
-  //     title,
-  //     date: selectedDate.toISOString().split("T")[0],
-  //     location,
-  //     thumbnail,
-  //     description,
-  //     contact: { name, email },
-  //     status: postType,
-  //   };
-  //   console.log("new post", newPost);
-  // }
     
   return (
     <div className="bg-blue-50 p-24">
@@ -140,11 +134,18 @@ const AddPost = () => {
               <input
                 type="file"
                 name="thumbnail"
+                onChange={handleImageChange}
                 placeholder="thumbnail"
                 className="file-input file-input-bordered w-full"
                 required
               />
             </label>
+            {/* Display image preview if an image is selected */}
+            {selectedImage && (
+              <div className="mt-4">
+                <img src={selectedImage} alt="Preview" className="w-48 h-48 object-cover" />
+              </div>
+            )}
           </div>
         </div>
         {/* form row 3*/}
@@ -188,8 +189,8 @@ const AddPost = () => {
               <input
                 type="text"
                 defaultValue={user?.displayName || "Anonymous"}
-                name="name"
-                placeholder="name"
+                // name="name"
+                // placeholder="name"
                 className="input input-bordered w-full"
                 readOnly
               />
@@ -203,15 +204,15 @@ const AddPost = () => {
               <input
                 type="email"
                 defaultValue={user?.email || "No email"}
-                name="email"
-                placeholder="Email"
+                // name="email"
+                // placeholder="Email"
                 className="input input-bordered w-full"
                 readOnly
               />
             </label>
           </div>
         </div>
-        {/* photo row 3*/}
+        {/* description row 4*/}
         <div className="ml-4 mb-8">
           <div className="w-full">
             <label className="form-control w-full">
