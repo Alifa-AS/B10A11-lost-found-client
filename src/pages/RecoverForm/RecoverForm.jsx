@@ -3,6 +3,8 @@ import { useParams } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import Swal from "sweetalert2";
+
 
 const RecoverForm = () => {
   const { id } = useParams();
@@ -10,7 +12,7 @@ const RecoverForm = () => {
   console.log(id, user);
   const [selectedDate, setSelectedDate] = useState(null);
 
-  const handleForm = (e) => {
+  const handleFormSubmit = (e) => {
     e.preventDefault();
 
     const form = e.currentTarget;
@@ -32,12 +34,19 @@ const RecoverForm = () => {
       photo: user?.photoURL,
     };
      console.log("Recover Data:", recoverData);
+
+     Swal.fire({
+      title: "Success!",
+      text: "Your recovery form has been submitted successfully!",
+      icon: "success",
+      confirmButtonText: "OK",
+    });
   };
 
   return (
     <div>
       <h3 className="text-center font-bold text-3xl">Recovered Form</h3>
-      <form onSubmit={handleForm} className="card-body">
+      <form onSubmit={handleFormSubmit} className="card-body">
         {/* location */}
         <div className="form-control">
           <label className="label">
@@ -84,7 +93,7 @@ const RecoverForm = () => {
             placeholder="Name"
             name="name"
             className="input input-bordered"
-            defaultValue={user?.name}
+            defaultValue={user?.name || ""} 
             readOnly
           />
         </div>

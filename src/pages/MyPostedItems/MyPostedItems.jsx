@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
-import { data } from "react-router-dom";
 import { MdDelete } from "react-icons/md";
 import { MdOutlineSecurityUpdateGood } from "react-icons/md";
 
@@ -19,6 +18,9 @@ const MyPostedItems = () => {
       <h2 className="text-3xl font-bold text-center">
         My Posted Items: {items.length}
       </h2>
+      {items.length === 0 ? (
+  <p className="text-center text-gray-500 mt-4">No items found.</p>
+) : (
       <div className="overflow-x-auto">
         <table className="table">
           {/* head */}
@@ -37,8 +39,8 @@ const MyPostedItems = () => {
             </tr>
           </thead>
           <tbody>
-            {
-                items.map((item, index) => <tr>
+            {items.map((item, index) => 
+            <tr key={index}>
                     <th>
                       <label>
                         <input type="checkbox" className="checkbox" />
@@ -73,13 +75,12 @@ const MyPostedItems = () => {
                       <button className="btn btn-ghost btn-lg"><MdOutlineSecurityUpdateGood /></button>
                       <button className="btn btn-ghost btn-lg"><MdDelete /></button>
                     </th>
-                  </tr>)
-            }
-          </tbody>
-          {/* foot */}
-         
+                  </tr>
+               )}
+          </tbody> 
         </table>
       </div>
+        )}
     </div>
   );
 };

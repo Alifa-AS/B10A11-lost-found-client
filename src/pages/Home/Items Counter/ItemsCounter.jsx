@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { FaCrown, FaBell, FaLock, FaStar, FaSearch, FaBoxOpen, FaCheckCircle } from "react-icons/fa";
+import { FaCrown, FaLock, FaStar, FaSearch, FaBoxOpen, FaCheckCircle } from "react-icons/fa";
 
 const PremiumClass = () => {
   const [stats, setStats] = useState({
@@ -26,11 +26,11 @@ const PremiumClass = () => {
   }, []);
 
   return (
-    <section className="my-20 text-center bg-[#56aeff] py-16 rounded-xl shadow-2xl">
+    <section className="my-20 text-center py-16 rounded-xl shadow-2xl">
       <div className="max-w-6xl mx-auto px-6">
         {/* Heading */}
-        <h2 className="text-4xl font-extrabold text-white drop-shadow-lg">🚀Lost & Found Services</h2>
-        <p className="text-lg text-white opacity-80 mb-8">Exclusive Priority Assistance & Tracking</p>
+        <h2 className="text-4xl font-extrabold text-blue-400 drop-shadow-lg">🚀Lost & Found Services</h2>
+        <p className="text-lg text-blue-300 opacity-80 mb-8">Exclusive Priority Assistance & Tracking</p>
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
@@ -38,43 +38,43 @@ const PremiumClass = () => {
           {/* Lost Items */}
           <div className="bg-white/20 shadow-xl rounded-3xl p-8 text-center backdrop-blur-md border border-white/30 transform hover:scale-105 transition-all duration-500 cursor-pointer">
             <FaSearch className="text-red-500 text-6xl mx-auto" />
-            <h3 className="text-4xl font-bold text-white mt-4">{stats.lostItems}</h3>
-            <p className="text-lg text-white opacity-90">Lost Items Reported</p>
+            <h3 className="text-4xl font-bold text-blue-400 mt-4">{stats.lostItems}</h3>
+            <p className="text-lg text-blue-300 opacity-90">Lost Items Reported</p>
           </div>
 
           {/* Found Items */}
           <div className="bg-white/20 shadow-xl rounded-3xl p-8 text-center backdrop-blur-md border border-white/30 transform hover:scale-105 transition-all duration-500 cursor-pointer">
             <FaBoxOpen className="text-green-400 text-6xl mx-auto" />
-            <h3 className="text-4xl font-bold text-white mt-4">{stats.foundItems}</h3>
-            <p className="text-lg text-white opacity-90">Found & Listed Items</p>
+            <h3 className="text-4xl font-bold text-blue-400 mt-4">{stats.foundItems}</h3>
+            <p className="text-lg text-blue-300 opacity-90">Found & Listed Items</p>
           </div>
 
           {/* Returned Items */}
-          <div className="bg-white/20 shadow-xl rounded-3xl p-8 text-center backdrop-blur-md border border-white/30 transform hover:scale-105 transition-all duration-500 cursor-pointer">
-            <FaCheckCircle className="text-blue-400 text-6xl mx-auto" />
-            <h3 className="text-4xl font-bold text-white mt-4">{stats.returnedItems}</h3>
-            <p className="text-lg text-white opacity-90">Returned to Owners</p>
+          <div className="bg-white/20  shadow-xl rounded-3xl p-8 text-center backdrop-blur-md border border-white/30 transform hover:scale-105 transition-all duration-500 cursor-pointer">
+            <FaCheckCircle className="text-orange-300 text-6xl mx-auto" />
+            <h3 className="text-4xl font-bold text-blue-400 mt-4">{stats.returnedItems}</h3>
+            <p className="text-lg text-blue-300 opacity-90">Returned to Owners</p>
           </div>
 
           {/* Premium Tracking */}
           <div className="bg-white/20 shadow-xl rounded-3xl p-8 text-center backdrop-blur-md border border-white/30 transform hover:scale-105 transition-all duration-500 cursor-pointer">
             <FaStar className="text-yellow-400 text-6xl mx-auto" />
-            <h3 className="text-4xl font-bold text-white mt-4">{stats.premiumTracking}</h3>
-            <p className="text-lg text-white opacity-90">Premium Tracking Users</p>
+            <h3 className="text-4xl font-bold text-blue-400 mt-4">{stats.premiumTracking}</h3>
+            <p className="text-lg text-blue-300 opacity-90">Premium Tracking Users</p>
           </div>
 
           {/* Secure Handling */}
           <div className="bg-white/20 shadow-xl rounded-3xl p-8 text-center backdrop-blur-md border border-white/30 transform hover:scale-105 transition-all duration-500 cursor-pointer">
             <FaLock className="text-indigo-400 text-6xl mx-auto" />
-            <h3 className="text-4xl font-bold text-white mt-4">{stats.secureHandling}</h3>
-            <p className="text-lg text-white opacity-90">Secure Items Handled</p>
+            <h3 className="text-4xl font-bold text-blue-400 mt-4">{stats.secureHandling}</h3>
+            <p className="text-lg text-blue-300 opacity-90">Secure Items Handled</p>
           </div>
 
           {/* VIP Assistance */}
           <div className="bg-white/20 shadow-xl rounded-3xl p-8 text-center backdrop-blur-md border border-white/30 transform hover:scale-105 transition-all duration-500 cursor-pointer">
             <FaCrown className="text-pink-400 text-6xl mx-auto" />
-            <h3 className="text-4xl font-bold text-white mt-4">{stats.vipAssistance}</h3>
-            <p className="text-lg text-white opacity-90">VIP Assistance Cases</p>
+            <h3 className="text-4xl font-bold text-blue-400 mt-4">{stats.vipAssistance}</h3>
+            <p className="text-lg text-blue-300 opacity-90">VIP Assistance Cases</p>
           </div>
         </div>
       </div>

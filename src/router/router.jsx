@@ -9,6 +9,7 @@ import PrivateRoute from "./PrivateRoute";
 import AddPost from "../pages/AddPost/AddPost";
 import AllItems from "../pages/All_Items/AllItems";
 import MyPostedItems from "../pages/MyPostedItems/MyPostedItems";
+import AllRecover from "../pages/AllRecover/AllRecover";
 
 const router = createBrowserRouter([
     {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
             element: <Home />,
         },
         {
-            path: '/items',
+            path: '/allItems',
             element: <AllItems />,
         },
         {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
         {
           path: '/addPostItems',
           element: <PrivateRoute><AddPost /></PrivateRoute>,
+        },
+        {
+          path: '/allRecovered',
+          element: <PrivateRoute><AllRecover /></PrivateRoute>,
         },
         {
           path: '/myPostedItems',
