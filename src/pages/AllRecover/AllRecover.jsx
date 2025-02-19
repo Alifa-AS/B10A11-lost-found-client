@@ -4,18 +4,25 @@ import { useLoaderData } from "react-router-dom";
 
 const AllRecover = () => {
   const { user } = useAuth();
-  const { thumbnail } = useLoaderData() || {};
   const [recoverItems, setRecoverItems] = useState([]);
   console.log(recoverItems);
-  
+
   useEffect(() => {
+    if (!user.email) return; 
+  
     fetch(`http://localhost:5000/recover?email=${user.email}`)
       .then((res) => res.json())
       .then((data) => {
-        console.log(data); 
-        setRecoverItems(data);
-      });
+        console.log("API Response:", data);
+        if (Array.isArray(data)) {
+          setRecoverItems(data);
+        } else {
+          setRecoverItems([]); 
+        }
+      })
+      .catch((error) => console.error("Error fetching recover items:", error));
   }, [user.email]);
+  
 
   return (
     <div className="max-w-4xl mx-auto py-10 px-4">
@@ -48,7 +55,7 @@ const AllRecover = () => {
                       <div className="avatar">
                         <div className="mask mask-squircle h-12 w-12">
                           <img
-                            src={thumbnail || "default-thumbnail.jpg"} 
+                            src={item.thumbnail || "default-thumbnail.jpg"}
                             alt={item.title || "No image"}
                           />
                         </div>
@@ -63,15 +70,21 @@ const AllRecover = () => {
                   </td>
                   <td className="p-3">{item.date || "N/A"}</td>
                   <td className="p-3">{item.location || "N/A"}</td>
-                  <td className="p-3">
+                  {/* <td className="p-3">
                     <span
                       className={`px-3 py-1 rounded-full text-white ${
-                        item.recovered ? "bg-green-500" : "bg-red-500"
+                        item.status ? "bg-green-500" : "bg-red-500"
                       }`}
                     >
-                      {item.recovered ? "Recovered" : "Not Found"}
+                      {item.status ? "Recovered" : "Not Found"}
+                    </span>
+                  </td> */}
+                  <td className="p-3">
+                    <span className="px-3 py-1 rounded-full text-white bg-green-500">
+                      Recovered
                     </span>
                   </td>
+
                   <td className="p-3">
                     <button className="btn border-indigo-800 btn-xs">
                       Details

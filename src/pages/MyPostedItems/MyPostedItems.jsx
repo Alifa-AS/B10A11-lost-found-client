@@ -4,15 +4,21 @@ import { MdDelete } from "react-icons/md";
 import { MdOutlineSecurityUpdateGood } from "react-icons/md";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const MyPostedItems = () => {
   const [items, setItems] = useState([]);
   const { user } = useAuth();
 
   useEffect(() => {
-    fetch(`http://localhost:5000/items?email=${user.email}`)
-      .then((res) => res.json())
-      .then((data) => setItems(data));
+    // fetch(`http://localhost:5000/items?email=${user.email}`)
+    //   .then((res) => res.json())
+    //   .then((data) => setItems(data));
+
+    axios.get(`http://localhost:5000/items?email=${user.email}`, 
+      {withCredentials: true})
+    .then(res => setItems(res.data))
+
   }, [user.email]);
 
   const handleDelete = (id) => {

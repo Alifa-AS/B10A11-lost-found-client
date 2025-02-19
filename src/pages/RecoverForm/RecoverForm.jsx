@@ -5,72 +5,88 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2";
 
-const RecoverForm = () => {
+const RecoverForm = ({item}) => {
+  if (!item) {
+    return <div>Loading...</div>; 
+  }
+  const { thumbnail } = item;
   const { id } = useParams();
   const { user } = useAuth();
   const navigate = useNavigate();
   // console.log(id, user);
 
-
   const [selectedDate, setSelectedDate] = useState(null);
 
-  const handleFormSubmit = (e) => {
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
 
     const form = e.currentTarget;
     const location = form.location.value;
     console.log(location);
 
-    const recoverData = {
-      location,
-      date: selectedDate,
-      // date: selectedDate ? selectedDate.toISOString() : null,
-      item_id: id,
-      contact: {
-        name: user?.displayName || "Unknown",
-        email: user?.email || "No Email",
-      },
-      photo: user?.photoURL,
-    };
-    console.log("Recover Data:", recoverData);
-    console.log(user?.name);
-console.log(user?.email);
+    try {
+      const itemResponse = await fetch(`http://localhost:5000/items/${id}`);
+      const itemData = await itemResponse.json();
 
-    Swal.fire({
-      position: "top-end",
-      icon: "success",
-      title: "Your work has been saved",
-      showConfirmButton: false,
-      timer: 1500,
-    });
+      if (itemData.status === "recovered") {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "This item has already been recovered!",
+        });
+        return;
+      }
 
-    fetch("http://localhost:5000/recover", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
+      const recoverData = {
+        location,
+        date: selectedDate ? selectedDate.toISOString() : null,
+        item_id: id,
+        contact: {
+          name: user?.displayName || "Unknown",
+          email: user?.email || "No Email",
+        },
+        photo: user?.photoURL || "",
+      };
 
-      body: JSON.stringify(recoverData),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.insertedId) {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Items has been added",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate('/allRecover')
-        }
+      const response = await fetch("http://localhost:5000/recover", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(recoverData),
       });
-    console.log("Data before sending to the backend:", recoverData);
+
+      const result = await response.json();
+
+      if (result.insertedId) {
+        await fetch(`http://localhost:5000/items/${id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ status: "recovered" }),
+        });
+
+        Swal.fire({
+          icon: "success",
+          title: "Item has been recovered!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+
+        navigate("/allRecover");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      Swal.fire({
+        icon: "error",
+        title: "Something went wrong!",
+        text: "Please try again later.",
+      });
+    }
   };
 
   return (
     <div>
-      <h3 className="label-text text-center font-bold text-3xl">Recovered Form</h3>
+      <h3 className="label-text text-center font-bold text-3xl">
+        Recovered Form
+      </h3>
       <form onSubmit={handleFormSubmit} className="card-body">
         {/* location */}
         <div className="form-control">
@@ -138,7 +154,8 @@ console.log(user?.email);
             placeholder="photo"
             name="photo"
             className="input input-bordered label-text "
-            defaultValue={user?.photoURL || ""}
+            // defaultValue={user?.photoURL || ""}
+            defaultValue={thumbnail}
             readOnly
           />
         </div>

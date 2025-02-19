@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import LatestItemsCard from "./LatestItemsCard";
 import { useTypewriter } from 'react-simple-typewriter';
+import { Link } from "react-router-dom";
 
 
 const LatestItems = () => {
@@ -35,7 +36,7 @@ const LatestItems = () => {
   return (
     <div className="my-20">
      <div>
-        <h2 className="text-center font-bold m-6 text-3xl text-sky-500">Latest Lost & found
+        <h2 className="text-center font-bold m-6 text-3xl text-blue-600">Latest Lost & found
         </h2>
           <h2 className="text-center"><span className="font-bold text-indigo-600 text-center">{typeEffect}</span></h2>
      </div>
@@ -45,7 +46,9 @@ const LatestItems = () => {
         ))}
       </div>
           <div className="my-10 text-center">
-            <button className="btn bg-sky-500 text-white">See All ...</button>
+          <Link to={"/allItems"}>
+         <button className="btn bg-blue-700 text-white">See All ...</button>
+         </Link>
           </div>
     </div>
   );

@@ -97,7 +97,7 @@ const ItemDetails = () => {
             ) : status?.toLowerCase() === "recovered" ? (
               <button
                 disabled
-                className="bg-gray-400 text-white px-5 py-2 rounded-lg shadow-md text-sm font-medium cursor-not-allowed"
+                className="bg-green-500 text-white px-5 py-2 rounded-lg shadow-md text-sm font-medium cursor-not-allowed"
               >
                 Recovered
               </button>
