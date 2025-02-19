@@ -15,25 +15,6 @@ const MyPostedItems = () => {
       .then((data) => setItems(data));
   }, [user.email]);
 
-  const handleUpdate = (id) => {
-    fetch(`http://localhost:5000/items/${id}`, {
-      method: "PUT",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ status: "Updated" }),
-    })
-      .then((res) => res.json())
-      .then((data) => {
-        if (data.modifiedCount > 0) {
-          alert("Item Updated Successfully!");
-          setItems(
-            items.map((item) =>
-              item._id === id ? { ...item, status: "Updated" } : item
-            )
-          );
-        }
-      });
-  };
-
   const handleDelete = (id) => {
     console.log(id);
     Swal.fire({
@@ -57,7 +38,7 @@ const MyPostedItems = () => {
                 text: "Your items has been deleted.",
                 icon: "success",
               });
-              setItems(items.filter((item) => item._id !== id)); // UI থেকে রিমুভ করা
+              setItems(items.filter((item) => item._id !== id));
             }
           });
       }
@@ -126,10 +107,7 @@ const MyPostedItems = () => {
                   </td>
                   <th>
                     <Link to={`/updateItems/${item._id}`}>
-                      <button
-                        onClick={() => handleUpdate(item._id)}
-                        className="btn btn-ghost btn-lg"
-                      >
+                      <button className="btn btn-ghost btn-lg">
                         <MdOutlineSecurityUpdateGood />
                       </button>
                     </Link>

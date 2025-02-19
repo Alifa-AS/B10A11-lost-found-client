@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { useParams } from "react-router-dom";
 import Swal from "sweetalert2";
@@ -7,15 +7,14 @@ import useAuth from "../../hooks/useAuth";
 
 const UpdateItems = () => {
   const item = useLoaderData();
-  console.log("Item Data:", item);
-
   const { id } = useParams();
   const { user } = useAuth();
+  const navigate = useNavigate();
   console.log(id, user);
 
   const [selectedDate, setSelectedDate] = useState(new Date());
 
-  const handleAddItems = (e) => {
+  const handleUpdateItems = (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
@@ -30,7 +29,7 @@ const UpdateItems = () => {
     };
     console.log(updatePost);
 
-    fetch("http://localhost:5000/items", {
+    fetch(`http://localhost:5000/items/${item._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",
@@ -40,15 +39,15 @@ const UpdateItems = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        if (data.insertedId) {
+        if (data.modifiedCount > 0) {
           Swal.fire({
             position: "top-end",
             icon: "success",
-            title: "Items has been added",
+            title: "Items Updated successfully",
             showConfirmButton: false,
             timer: 1500,
           });
-          // Navigate('/myPostedItems')
+          navigate('/myPostedItems')
         }
       });
   };
@@ -58,7 +57,7 @@ const UpdateItems = () => {
       <h2 className="text-3xl font-extrabold pb-10 text-center">
         Update Lost & Found Items
       </h2>
-      <form onSubmit={handleAddItems}>
+      <form onSubmit={handleUpdateItems}>
         {/* items row1*/}
         <div className="md:flex mb-8">
           <div className="md:w-1/2 ml-4">
