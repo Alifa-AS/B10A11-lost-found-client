@@ -67,7 +67,7 @@ const Navbar = () => {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/allRecovered">All Recovered Items</Link>
+                  <Link to="/allRecover">All Recovered Items</Link>
                 </li>
                 <li>
                   <Link to="/myPostedItems">Manage My Posted Items</Link>

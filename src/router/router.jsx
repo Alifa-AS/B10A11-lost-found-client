@@ -10,6 +10,8 @@ import AddPost from "../pages/AddPost/AddPost";
 import AllItems from "../pages/All_Items/AllItems";
 import MyPostedItems from "../pages/MyPostedItems/MyPostedItems";
 import AllRecover from "../pages/AllRecover/AllRecover";
+import RecoverForm from "../pages/RecoverForm/RecoverForm";
+import UpdateItems from "../pages/UpdateItems/UpdateItems";
 
 const router = createBrowserRouter([
     {
@@ -22,25 +24,39 @@ const router = createBrowserRouter([
             element: <Home />,
         },
         {
-            path: '/allItems',
+            path: 'allItems',
             element: <AllItems />,
         },
         {
-          path: '/items/:id',
+          path: 'items/:id',
           element:<PrivateRoute><ItemDetails /></PrivateRoute>,
           loader: ({params}) => fetch(`http://localhost:5000/items/${params.id}`)
         },
         {
-          path: '/addPostItems',
+          path: 'addPostItems',
           element: <PrivateRoute><AddPost /></PrivateRoute>,
         },
         {
-          path: '/allRecovered',
-          element: <PrivateRoute><AllRecover /></PrivateRoute>,
+          path: 'recover/:id',
+          element: <PrivateRoute><RecoverForm/></PrivateRoute>,
         },
         {
-          path: '/myPostedItems',
+          path: 'allRecover',
+          element: <PrivateRoute><AllRecover /></PrivateRoute>,
+          loader: async () => {
+            const res = await fetch("http://localhost:5000/items");
+            const data = await res.json();
+            return { thumbnail: data[0]?.thumbnail || "default-thumbnail" };
+          },
+        },
+        {
+          path: 'myPostedItems',
           element: <PrivateRoute><MyPostedItems /></PrivateRoute>,
+        },
+        {
+          path: 'updateItems/:id',
+          element: <PrivateRoute><UpdateItems /></PrivateRoute>,
+          loader: ({params}) => fetch(`http://localhost:5000/items/${params.id}`)
         },
         {
             path: 'register',

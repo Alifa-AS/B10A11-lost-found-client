@@ -1,61 +1,63 @@
 import React, { useState } from "react";
+import { useLoaderData } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import { useParams } from "react-router-dom";
-import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
+import useAuth from "../../hooks/useAuth";
 
-const AddPost = () => {
+const UpdateItems = () => {
+  const item = useLoaderData();
+  console.log("Item Data:", item);
+
   const { id } = useParams();
   const { user } = useAuth();
   console.log(id, user);
 
   const [selectedDate, setSelectedDate] = useState(new Date());
-  
+
   const handleAddItems = (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
     const initialData = Object.fromEntries(formData.entries());
     console.log(initialData);
-    const newPost = {
-      ...initialData, 
+    const updatePost = {
+      ...initialData,
       contact: {
         name: user?.displayName || "Anonymous",
         email: user?.email || "No Email",
-
       },
-    }; 
-    console.log(newPost);
+    };
+    console.log(updatePost);
 
-    fetch('http://localhost:5000/items', {
-      method: 'POST',
+    fetch("http://localhost:5000/items", {
+      method: "PUT",
       headers: {
-        'content-type': 'application/json'
+        "content-type": "application/json",
       },
-      
-      body: JSON.stringify(newPost)
+
+      body: JSON.stringify(updatePost),
     })
-    .then(res => res.json())
-    .then(data => {
-      if(data.insertedId){
-        Swal.fire({
-          position: "top-end",
-          icon: "success",
-          title: "Items has been added",
-          showConfirmButton: false,
-          timer: 1500
-        });
-        // Navigate('/myPostedItems')
-      }
-    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Items has been added",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          // Navigate('/myPostedItems')
+        }
+      });
+  };
 
-  }
-
-
-    
   return (
     <div className="bg-blue-50 p-24">
-      <h2 className="text-3xl font-extrabold pb-10 text-center">Add Lost & Found Items</h2>
+      <h2 className="text-3xl font-extrabold pb-10 text-center">
+        Update Lost & Found Items
+      </h2>
       <form onSubmit={handleAddItems}>
         {/* items row1*/}
         <div className="md:flex mb-8">
@@ -69,6 +71,7 @@ const AddPost = () => {
                 name="title"
                 placeholder="Item Title"
                 className="input input-bordered w-full"
+                defaultValue={item.title}
                 required
               />
             </label>
@@ -78,10 +81,12 @@ const AddPost = () => {
               <div className="label">
                 <span className="label-text">Category</span>
               </div>
-              <select defaultValue="Items Category" name="category" className="select select-bordered w-full">
-                <option disabled>
-                  Items Category
-                </option>
+              <select
+                defaultValue={item.category || "Items Category"}
+                name="category"
+                className="select select-bordered w-full"
+              >
+                <option disabled>Items Category</option>
                 <option>Pets</option>
                 <option>Documents</option>
                 <option>Gadgets</option>
@@ -100,34 +105,35 @@ const AddPost = () => {
               </div>
               <DatePicker
                 type="date"
-                
                 selected={selectedDate}
                 onChange={(date) => setSelectedDate(date)}
                 dateFormat="MM/dd/yyyy"
                 placeholderText="Select a date"
                 className="input input-bordered w-full"
+                defaultValue={item.date}
                 required
               />
               {/* hidden input */}
               <input
-              type="hidden"
-              name="date"
-              value={selectedDate.toISOString().split("T")[0]}
+                type="hidden"
+                name="date"
+                value={selectedDate.toISOString().split("T")[0]}
               />
             </label>
           </div>
           <div className="md:w-1/2 ml-4">
-          <label className="form-control w-full">
-                <div className="label">
-                  <span className="label-text">Image URL</span>
-                </div>
-                <input
-                  type="text"
-                  name="image"
-                  placeholder="Image URL"
-                  className="input input-bordered w-full"
-                />
-              </label>
+            <label className="form-control w-full">
+              <div className="label">
+                <span className="label-text">Image URL</span>
+              </div>
+              <input
+                type="text"
+                name="image"
+                placeholder="Image URL"
+                className="input input-bordered w-full"
+                defaultValue={item.thumbnail}
+              />
+            </label>
           </div>
         </div>
         {/* form row 3*/}
@@ -142,6 +148,7 @@ const AddPost = () => {
                 name="location"
                 placeholder="Location"
                 className="input input-bordered w-full"
+                defaultValue={item.location}
                 required
               />
             </label>
@@ -151,10 +158,12 @@ const AddPost = () => {
               <div className="label">
                 <span className="label-text">status</span>
               </div>
-              <select defaultValue="Item Status" name="status" className="select select-bordered w-full">
-                <option disabled>
-                  Item Status
-                </option>
+              <select
+                defaultValue={item.status || "Item Status"}
+                name="status"
+                className="select select-bordered w-full"
+              >
+                <option disabled>Item Status</option>
                 <option>Lost</option>
                 <option>Found</option>
               </select>
@@ -206,6 +215,7 @@ const AddPost = () => {
                 name="description"
                 placeholder="Description"
                 className="textarea textarea-bordered textarea-md w-full"
+                defaultValue={item.description}
                 required
               ></textarea>
             </label>
@@ -213,7 +223,7 @@ const AddPost = () => {
         </div>
         <input
           type="submit"
-          value="Add Items"
+          value="Update Items"
           className="btn btn-block bg-[#031e40] text-white"
           required
         />
@@ -222,4 +232,4 @@ const AddPost = () => {
   );
 };
 
-export default AddPost;
+export default UpdateItems;

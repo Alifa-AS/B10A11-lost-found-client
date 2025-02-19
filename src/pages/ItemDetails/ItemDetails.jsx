@@ -18,7 +18,7 @@ const ItemDetails = () => {
   console.log("Status value:", status);
 
   return (
-    <div className="flex justify-center items-center min-h-screen bg-white p-6">
+    <div className="flex justify-center items-center min-h-screen p-6">
       <div className="max-w-3xl w-full bg-blue-100 backdrop-blur-xl shadow-lg border border-gray-200 rounded-xl overflow-hidden transition-all duration-500 hover:shadow-[0px_0px_20px_rgba(0,0,0,0.1)]">
         {/* Image Section */}
         <div className="relative w-full h-64">

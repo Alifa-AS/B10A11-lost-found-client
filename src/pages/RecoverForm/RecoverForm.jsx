@@ -1,15 +1,17 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2";
 
-
 const RecoverForm = () => {
   const { id } = useParams();
   const { user } = useAuth();
-  console.log(id, user);
+  const navigate = useNavigate();
+  // console.log(id, user);
+
+
   const [selectedDate, setSelectedDate] = useState(null);
 
   const handleFormSubmit = (e) => {
@@ -17,35 +19,58 @@ const RecoverForm = () => {
 
     const form = e.currentTarget;
     const location = form.location.value;
-    // const date = form.date.value;
-    // const name = form.name.value;
-    // const email = form.email.value;
-    // const photo = form.photo.value;
-
-    // const formData = { location, date, name, email, photo };
-    // console.log(formData);
+    console.log(location);
 
     const recoverData = {
       location,
       date: selectedDate,
+      // date: selectedDate ? selectedDate.toISOString() : null,
       item_id: id,
-      name: user?.name,
-      email: user?.email,
+      contact: {
+        name: user?.displayName || "Unknown",
+        email: user?.email || "No Email",
+      },
       photo: user?.photoURL,
     };
-     console.log("Recover Data:", recoverData);
+    console.log("Recover Data:", recoverData);
+    console.log(user?.name);
+console.log(user?.email);
 
-     Swal.fire({
-      title: "Success!",
-      text: "Your recovery form has been submitted successfully!",
+    Swal.fire({
+      position: "top-end",
       icon: "success",
-      confirmButtonText: "OK",
+      title: "Your work has been saved",
+      showConfirmButton: false,
+      timer: 1500,
     });
+
+    fetch("http://localhost:5000/recover", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+
+      body: JSON.stringify(recoverData),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Items has been added",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate('/allRecover')
+        }
+      });
+    console.log("Data before sending to the backend:", recoverData);
   };
 
   return (
     <div>
-      <h3 className="text-center font-bold text-3xl">Recovered Form</h3>
+      <h3 className="label-text text-center font-bold text-3xl">Recovered Form</h3>
       <form onSubmit={handleFormSubmit} className="card-body">
         {/* location */}
         <div className="form-control">
@@ -64,16 +89,9 @@ const RecoverForm = () => {
         <div className="form-control">
           <label className="label">
             <span className="label-text">Pick Date</span>
-          </label> 
-          {/* <input
-                  type="date"
-                  placeholder="date"
-                  name="date"
-                  className="input input-bordered"
-                  required
-                /> */}
-          <DatePicker 
-            type="date"
+          </label>
+
+          <DatePicker
             selected={selectedDate}
             onChange={(date) => setSelectedDate(date)}
             dateFormat="MM/dd/yyyy"
@@ -81,7 +99,6 @@ const RecoverForm = () => {
             className="input input-bordered w-full"
             required
           />
-          
         </div>
         {/* name */}
         <div className="form-control">
@@ -92,8 +109,8 @@ const RecoverForm = () => {
             type="text"
             placeholder="Name"
             name="name"
-            className="input input-bordered"
-            defaultValue={user?.name || ""} 
+            className="input input-bordered label-text"
+            defaultValue={user?.displayName || "Default Name"}
             readOnly
           />
         </div>
@@ -106,7 +123,7 @@ const RecoverForm = () => {
             type="email"
             placeholder="email"
             name="email"
-            className="input input-bordered"
+            className="input input-bordered label-text "
             defaultValue={user?.email || ""}
             readOnly
           />
@@ -120,7 +137,7 @@ const RecoverForm = () => {
             type="text"
             placeholder="photo"
             name="photo"
-            className="input input-bordered"
+            className="input input-bordered label-text "
             defaultValue={user?.photoURL || ""}
             readOnly
           />
