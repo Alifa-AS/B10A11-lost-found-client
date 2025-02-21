@@ -1,29 +1,55 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import LatestItemsCard from "./LatestItemsCard";
 import { useTypewriter } from 'react-simple-typewriter';
 import { Link } from "react-router-dom";
+import AuthContext from "../../context/AuthContext";
+import axios from "axios";
 
 
 const LatestItems = () => {
+  const { user, accessToken } = useContext(AuthContext);
   const [items, setItems] = useState([]);
 
   const [typeEffect] = useTypewriter({
-    words: ['', ''],
+    words: ['Lost & Found Items', 'Report Missing Items', 'Find Your Items'],
     loop: true,
     typeSpeed: 100,
     deleteSpeed: 40
   })
 
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/items")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //         const sortedItems = 
+  //         data.sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0,6);
+  //         setItems(sortedItems);
+  //     })
+  //      .catch((error)=>console.error("Error Fetching:", error));
+  // }, []);
+
   useEffect(() => {
-    fetch("http://localhost:5000/items")
-      .then((res) => res.json())
-      .then((data) => {
-          const sortedItems = 
-          data.sort((a,b) => new Date(b.date) - new Date(a.date)).slice(0,6);
-          setItems(sortedItems);
-      })
-       .catch((error)=>console.error("Error Fetching:", error));
-  }, []);
+    const fetchItems = async () => {
+      if (!user) return; 
+
+      try {
+        const res = await axios.get("http://localhost:5000/items", {
+          headers: {
+            Authorization: `Bearer ${accessToken}`, 
+          },
+          withCredentials: true,
+        });
+
+        console.log("✅ Items Response:", res.data);
+        setItems(res.data);
+      } catch (error) {
+        console.error("❌ Error Fetching Items:", error);
+      }
+    };
+
+    fetchItems(); 
+  }, [user, accessToken]);
+
 
   if(items.length === 0){
     return(

@@ -155,19 +155,36 @@ const UpdateItems = () => {
           <div className="md:w-1/2 ml-4">
             <label className="form-control w-full">
               <div className="label">
+                <span className="label-text">Status</span>
+              </div>
+              <input
+                type="text"
+                name="status"
+                placeholder="status"
+                className="input input-bordered w-full"
+                defaultValue={item.status}
+                required
+                readOnly
+              />
+            </label>
+          </div>
+          {/* <div className="md:w-1/2 ml-4">
+            <label className="form-control w-full">
+              <div className="label">
                 <span className="label-text">status</span>
               </div>
               <select
                 defaultValue={item.status || "Item Status"}
                 name="status"
                 className="select select-bordered w-full"
+                
               >
                 <option disabled>Item Status</option>
                 <option>Lost</option>
                 <option>Found</option>
               </select>
             </label>
-          </div>
+          </div> */}
         </div>
         {/* form row 3*/}
         <div className="md:flex mb-8">

@@ -15,11 +15,24 @@ const MyPostedItems = () => {
     //   .then((res) => res.json())
     //   .then((data) => setItems(data));
 
-    axios.get(`http://localhost:5000/items?email=${user.email}`, 
-      {withCredentials: true})
-    .then(res => setItems(res.data))
+    //   axios
+    //       withCredentials: true,
+    //     })
+    //     .then((res) => setItems(res.data))
+    //     .catch((error) => console.error("Error fetching items:", error));
 
-  }, [user.email]);
+    // }, [user?.email]);
+    if (user?.email) {
+      // Check if user exists before fetching
+      axios
+        .get(`http://localhost:5000/items?email=${user.email}`, {
+          withCredentials: true,
+        })
+        .then((res) => setItems(res.data))
+        .catch((error) => console.error("Error fetching items:", error));
+    }
+  }, [user?.email]);
+  console.log(items)
 
   const handleDelete = (id) => {
     console.log(id);
@@ -90,9 +103,10 @@ const MyPostedItems = () => {
                       <div className="avatar">
                         <div className="mask mask-squircle h-12 w-12">
                           <img
-                            src={item.thumbnail}
+                            src={item.image}
                             alt="Avatar Tailwind CSS Component"
                           />
+                     
                         </div>
                       </div>
                       <div>

@@ -41,7 +41,7 @@ const Login = () => {
         console.log(res.data);
       })
 
-      // navigate(from);
+      navigate(from);
     })
     .catch(error =>{
       console.log(error)

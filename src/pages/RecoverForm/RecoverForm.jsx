@@ -5,11 +5,12 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import Swal from "sweetalert2";
 
-const RecoverForm = ({item}) => {
+const RecoverForm = ({ item }) => {
   if (!item) {
-    return <div>Loading...</div>; 
+    return <div>Loading...</div>;
   }
   const { thumbnail } = item;
+  console.log(item);
   const { id } = useParams();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -39,13 +40,22 @@ const RecoverForm = ({item}) => {
 
       const recoverData = {
         location,
-        date: selectedDate ? selectedDate.toISOString() : null,
+        // date: selectedDate ? selectedDate.toISOString() : null,
+        date: selectedDate
+          ? `${selectedDate.getFullYear()}-${(selectedDate.getMonth() + 1)
+              .toString()
+              .padStart(2, "0")}-${selectedDate
+              .getDate()
+              .toString()
+              .padStart(2, "0")}`
+          : null,
         item_id: id,
         contact: {
           name: user?.displayName || "Unknown",
           email: user?.email || "No Email",
         },
-        photo: user?.photoURL || "",
+        // photo: user?.photoURL || "",
+        photo: thumbnail,
       };
 
       const response = await fetch("http://localhost:5000/recover", {

@@ -43,11 +43,6 @@ const router = createBrowserRouter([
         {
           path: 'allRecover',
           element: <PrivateRoute><AllRecover /></PrivateRoute>,
-          loader: async () => {
-            const res = await fetch("http://localhost:5000/items");
-            const data = await res.json();
-            return { thumbnail: data[0]?.thumbnail || "default-thumbnail" };
-          },
         },
         {
           path: 'myPostedItems',
