@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import DatePicker from "react-datepicker";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 
 const AddPost = () => {
   const { id } = useParams();
   const { user } = useAuth();
+  const navigate = useNavigate();
   console.log(id, user);
 
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -45,7 +46,7 @@ const AddPost = () => {
           showConfirmButton: false,
           timer: 1500
         });
-        // Navigate('/myPostedItems')
+        navigate('/myPostedItems')
       }
     })
 
@@ -123,7 +124,7 @@ const AddPost = () => {
                 </div>
                 <input
                   type="text"
-                  name="image"
+                  name="thumbnail"
                   placeholder="Image URL"
                   className="input input-bordered w-full"
                 />

@@ -15,7 +15,6 @@ const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  const [accessToken, setAccessToken] = useState(null);
   const [loading, setLoading] = useState(true);
 
   const createUser = (email, password) => {
@@ -23,25 +22,34 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
-  const signInUser = (email, password) => {
+  // const signInUser = (email, password) => {
+  //   setLoading(true);
+  //   setAccessToken(token);
+  //   return signInWithEmailAndPassword(auth, email, password);
+  // };
+
+  const signInUser = async (email, password) => {
     setLoading(true);
-    setAccessToken(token);
-    return signInWithEmailAndPassword(auth, email, password);
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      console.log("User signed in:", userCredential.user);
+
+      await axios.post(
+        "http://localhost:5000/jwt",
+        { email },
+        { withCredentials: true }
+      );
+    } catch (error) {
+      console.error("Error signing in:", error);
+    } finally {
+      setLoading(false);
+    }
   };
 
-  // const signInUser = async (email, password) => {
-  //   setLoading(true);
-  //   try {
-  //     await signInWithEmailAndPassword(auth, email, password);
-  //     const tokenResponse = await axios.post("http://localhost:5000/jwt", { email });
-  //     setAccessToken(tokenResponse.data.token);
-  //   } catch (error) {
-  //     console.error("Error signing in:", error);
-  //   } finally {
-  //     setLoading(false);
-  //   }
-  // };
-  
   const signInWithGoogle = () => {
     setLoading(true);
     return signInWithPopup(auth, googleProvider);
@@ -49,7 +57,6 @@ const AuthProvider = ({ children }) => {
 
   const signOutUser = () => {
     setLoading(true);
-    setAccessToken(null);
     return signOut(auth);
   };
 
@@ -59,15 +66,28 @@ const AuthProvider = ({ children }) => {
       setUser(currentUser);
       console.log("state captured", currentUser);
       setLoading(false);
+
       if (currentUser?.email) {
         axios
-          .post("http://localhost:5000/jwt", {email: currentUser.email}, { withCredentials: true })
+          .post(
+            "http://localhost:5000/jwt",
+            { email: currentUser.email },
+            { withCredentials: true }
+          )
           .then((res) => {
-            console.log(res.data);
-            if (res.data.token) {
-              setAccessToken(res.data.token);  
-            }
+            console.log("login token", res.data);
+            // setLoading(false);
           });
+      } else {
+        axios
+          .post(
+            "http://localhost:5000/logout",
+            {},
+            {
+              withCredentials: true,
+            }
+          )
+          .then((res) => console.log("logout", res.data));
       }
     });
 
@@ -83,7 +103,6 @@ const AuthProvider = ({ children }) => {
     signInUser,
     signInWithGoogle,
     signOutUser,
-    accessToken
   };
 
   return (

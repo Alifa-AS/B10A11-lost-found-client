@@ -4,35 +4,23 @@ import { MdDelete } from "react-icons/md";
 import { MdOutlineSecurityUpdateGood } from "react-icons/md";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import useAxiosSecure from "../../hooks/useAxiosSecure";
 
 const MyPostedItems = () => {
   const [items, setItems] = useState([]);
   const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
 
   useEffect(() => {
-    // fetch(`http://localhost:5000/items?email=${user.email}`)
-    //   .then((res) => res.json())
-    //   .then((data) => setItems(data));
-
-    //   axios
-    //       withCredentials: true,
-    //     })
-    //     .then((res) => setItems(res.data))
-    //     .catch((error) => console.error("Error fetching items:", error));
-
-    // }, [user?.email]);
     if (user?.email) {
       // Check if user exists before fetching
-      axios
-        .get(`http://localhost:5000/items?email=${user.email}`, {
-          withCredentials: true,
-        })
+      
+        axiosSecure.get(`/items?email=${user.email}`)
         .then((res) => setItems(res.data))
         .catch((error) => console.error("Error fetching items:", error));
     }
   }, [user?.email]);
-  console.log(items)
+  console.log(items);
 
   const handleDelete = (id) => {
     console.log(id);
@@ -83,9 +71,11 @@ const MyPostedItems = () => {
                   </label>
                 </th>
                 <th></th>
-                <th>Name</th>
+                <th>Items</th>
                 <th>Status</th>
                 <th>Deadline</th>
+                <th>Location</th>
+                <th>Contact</th>
                 <th></th>
               </tr>
             </thead>
@@ -103,16 +93,15 @@ const MyPostedItems = () => {
                       <div className="avatar">
                         <div className="mask mask-squircle h-12 w-12">
                           <img
-                            src={item.image}
+                            src={item.thumbnail}
                             alt="Avatar Tailwind CSS Component"
                           />
-                     
                         </div>
                       </div>
                       <div>
                         <div className="font-bold">{item.title}</div>
                         <div className="text-sm opacity-50">
-                          {item.location}
+                          {item.category}
                         </div>
                       </div>
                     </div>
@@ -123,6 +112,14 @@ const MyPostedItems = () => {
                     <br />
                     <span className="badge badge-ghost badge-sm">
                       {item.status}
+                    </span>
+                  </td>
+                  <td>{item.location}</td>
+                  <td>
+                    {item.contact.name}
+                    <br />
+                    <span className="badge badge-ghost badge-sm">
+                      {item.contact.email}
                     </span>
                   </td>
                   <th>
