@@ -7,7 +7,7 @@ const useItems = (sort, search, filter) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/items?sort=${sort}&search=${search}&filter=${filter}`, {
+      .get(`http://localhost:5000/items/all?sort=${sort}&search=${search}&filter=${filter}`, {
         withCredentials: true,
       })
       .then((res) => {

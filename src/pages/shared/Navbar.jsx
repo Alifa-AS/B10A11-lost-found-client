@@ -32,7 +32,7 @@ const Navbar = () => {
               <Link to="/">Home</Link>
             </li>
             <li>
-              <Link to="/allItems">All Items</Link>
+              <Link to="/items/all">Lost & Found Items</Link>
             </li>
 
             {!user && (
@@ -49,7 +49,7 @@ const Navbar = () => {
                 role="button"
                 className="btn btn-ghost btn-circle avatar"
               >
-                <div title={user?.displayName} className="w-10 rounded-full">
+                <div title={`${user?.displayName} (${user?.email})`}  className="w-10 rounded-full">
                   <img
                     referrerPolicy="no-referrer"
                     alt="User"

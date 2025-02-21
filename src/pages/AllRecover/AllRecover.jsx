@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import { RiLayoutGrid2Fill } from "react-icons/ri";
+import axios from "axios";
 
 const AllRecover = () => {
   const { user } = useAuth();
@@ -12,16 +13,26 @@ const AllRecover = () => {
   useEffect(() => {
     if (!user.email) return;
 
-    fetch(`http://localhost:5000/recover?email=${user.email}`)
-      .then((res) => res.json())
-      .then((data) => {
-        console.log("API Response:", data);
-        if (Array.isArray(data)) {
-          setRecoverItems(data);
+    axios.get(`http://localhost:5000/recover?email=${user.email}`)
+    .then(res =>{
+        console.log("API Response:", res.data);
+        if (Array.isArray(res.data)) {
+          setRecoverItems(res.data);
         } else {
           setRecoverItems([]);
         }
-      })
+      
+    })
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     console.log("API Response:", data);
+    //     if (Array.isArray(data)) {
+    //       setRecoverItems(data);
+    //     } else {
+    //       setRecoverItems([]);
+    //     }
+    //   })
+    
       .catch((error) => console.error("Error fetching recover items:", error));
   }, [user.email]);
 
@@ -130,7 +141,9 @@ const AllRecover = () => {
                 {new Date(item.date).toLocaleDateString()}
               </p>
               <p className="mt-1">
-              <span className="font-semibold text-green-600">Recovered By :</span>{" "}
+                <span className="font-semibold text-green-600">
+                  Recovered By :
+                </span>{" "}
                 <div>
                   <span className="font-semibold">Name:</span>{" "}
                   {item.contact.name || "N/A"}

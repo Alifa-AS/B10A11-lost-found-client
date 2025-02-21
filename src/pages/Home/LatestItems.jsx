@@ -15,7 +15,7 @@ const LatestItems = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/items")
+    fetch("http://localhost:5000/items/all")
       .then((res) => {
         if (!res.ok) {
           throw new Error('Failed to fetch');
@@ -76,7 +76,7 @@ const LatestItems = () => {
         ))}
       </div>
       <div className="my-10 text-center">
-        <Link to={"/allItems"}>
+        <Link to={"/items/all"}>
           <button className="btn bg-blue-700 text-white">See All ...</button>
         </Link>
       </div>
