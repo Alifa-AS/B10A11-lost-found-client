@@ -1,39 +1,60 @@
-// import React, { useState } from "react";
-// import LatestItemsCard from "../Home/LatestItemsCard";
-
-// const AllItems = () => {
-//     const [sort, setSort] = useState(false);
-//     console.log(sort);
-
-
-//   return (
-//     <div>
-//       <h1 className="py-5 text-3xl font-bold text-center"> All Items</h1>
-
-//       <div className='w-11/12 mx-auto bg-base-200 py-5 p-3 flex items-center'>
-//                <button onClick={()=>setSort(!sort)}
-//                 className={`btn btn-neutral ${sort && "btn-success"}`}>
-//                     {sort == true ? "Sorted By" : "Sort By"}</button>
-//            </div>
-
-
-//       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-//         {items.map((item) => (
-//           <LatestItemsCard key={item._id} item={item} />
-//         ))}
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default AllItems;
-
-import React from 'react';
+import React, { useState } from "react";
+import useItems from "../../hooks/useItems";
+import LatestItemsCard from "../Home/LatestItemsCard";
+import Loading from "../shared/Loading";
+import { FaSearch } from "react-icons/fa";
 
 const AllItems = () => {
+  const [sort, setSort] = useState(false);
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("");
+  const { items, loading } = useItems(sort, search, filter);
+  // console.log(sort);
+
+  if (loading) {
+    return <Loading />;
+  }
+
   return (
     <div>
-       <h2 className='text-center font-bold text-3xl py-10'>All Items</h2>
+      <h2 className="text-center font-bold text-3xl py-10">All Items</h2>
+
+      <div className="w-11/12 mx-auto bg-base-200 py-5 p-3 flex items-center justify-between">
+        <button
+          onClick={() => setSort(!sort)}
+          className={`btn btn-neutral ${sort && "btn-success"}`}
+        >
+          {sort == true ? "Sorted By Title" : "Sort By Title"}
+        </button>
+
+        <label className="input input-bordered flex items-center gap-2">
+          <input
+            onKeyUp={(e) => setSearch(e.target.value)}
+            type="text"
+            className="grow"
+            placeholder="Search by location"
+          />
+          <FaSearch />
+        </label>
+
+        <select
+          onChange={(e) => setFilter(e.target.value)}
+          className="select select-bordered w-full max-w-xs"
+        >
+          <option disabled>Category</option>
+          <option>Documents</option>
+          <option>Gadgets</option>
+          <option>Accessories</option>
+          <option>Vehicles</option>
+          <option>Pets</option>
+        </select>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+        {items.map((item) => (
+          <LatestItemsCard key={item._id} item={item} />
+        ))}
+      </div>
     </div>
   );
 };

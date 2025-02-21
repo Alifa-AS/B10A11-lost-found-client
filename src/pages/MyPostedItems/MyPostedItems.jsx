@@ -14,9 +14,13 @@ const MyPostedItems = () => {
   useEffect(() => {
     if (user?.email) {
       // Check if user exists before fetching
-      
-        axiosSecure.get(`/items?email=${user.email}`)
-        .then((res) => setItems(res.data))
+
+      axiosSecure
+        .get(`/items?email=${user.email}`)
+        .then((res) => {
+          console.log(res.data);
+          setItems(res.data);
+        })
         .catch((error) => console.error("Error fetching items:", error));
     }
   }, [user?.email]);
@@ -94,7 +98,7 @@ const MyPostedItems = () => {
                         <div className="mask mask-squircle h-12 w-12">
                           <img
                             src={item.thumbnail}
-                            alt="Avatar Tailwind CSS Component"
+                            alt="image"
                           />
                         </div>
                       </div>
