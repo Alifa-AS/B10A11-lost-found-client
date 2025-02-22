@@ -10,7 +10,7 @@ const UpdateItems = () => {
   const { id } = useParams();
   const { user } = useAuth();
   const navigate = useNavigate();
-  console.log(id, user);
+  // console.log(id, user);
 
   const [selectedDate, setSelectedDate] = useState(new Date());
 
@@ -19,7 +19,7 @@ const UpdateItems = () => {
 
     const formData = new FormData(e.target);
     const initialData = Object.fromEntries(formData.entries());
-    console.log(initialData);
+    // console.log(initialData);
     const updatePost = {
       ...initialData,
       contact: {
@@ -27,9 +27,9 @@ const UpdateItems = () => {
         email: user?.email || "No Email",
       },
     };
-    console.log(updatePost);
+    // console.log(updatePost);
 
-    fetch(`http://localhost:5000/items/${item._id}`, {
+    fetch(`https://lost-and-found-server-swart.vercel.app/items/${item._id}`, {
       method: "PUT",
       headers: {
         "content-type": "application/json",

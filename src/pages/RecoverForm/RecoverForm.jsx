@@ -10,7 +10,7 @@ const RecoverForm = ({ item }) => {
     return <div>Loading...</div>;
   }
   const { thumbnail } = item;
-  console.log(item);
+  // console.log(item);
   const { id } = useParams();
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -23,10 +23,10 @@ const RecoverForm = ({ item }) => {
 
     const form = e.currentTarget;
     const location = form.location.value;
-    console.log(location);
+    // console.log(location);
 
     try {
-      const itemResponse = await fetch(`http://localhost:5000/items/${id}`);
+      const itemResponse = await fetch(`https://lost-and-found-server-swart.vercel.app/items/${id}`);
       const itemData = await itemResponse.json();
 
       if (itemData.status === "recovered") {
@@ -58,7 +58,7 @@ const RecoverForm = ({ item }) => {
         photo: thumbnail,
       };
 
-      const response = await fetch("http://localhost:5000/recover", {
+      const response = await fetch("https://lost-and-found-server-swart.vercel.app/recover", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(recoverData),
@@ -67,7 +67,7 @@ const RecoverForm = ({ item }) => {
       const result = await response.json();
 
       if (result.insertedId) {
-        await fetch(`http://localhost:5000/items/${id}`, {
+        await fetch(`https://lost-and-found-server-swart.vercel.app/items/${id}`, {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ status: "recovered" }),

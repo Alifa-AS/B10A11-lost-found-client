@@ -19,37 +19,40 @@ const AllItems = () => {
     <div>
       <h2 className="text-center font-bold text-3xl py-10">All Items</h2>
 
-      <div className="w-11/12 mx-auto bg-base-200 py-5 p-3 flex items-center justify-between">
-        <button
-          onClick={() => setSort(!sort)}
-          className={`btn btn-neutral ${sort && "btn-success"}`}
-        >
-          {sort == true ? "Sorted By Title" : "Sort By Title"}
-        </button>
+      <div className="w-11/12 mx-auto bg-base-200 py-5 p-3 flex flex-wrap gap-3 items-center">
+        <div className="flex w-full md:w-auto md:mr-auto">
+          <button
+            onClick={() => setSort(!sort)}
+            className={`btn btn-neutral ${sort && "btn-success"}`}
+          >
+            {sort == true ? "Sorted By Title" : "Sort By Title"}
+          </button>
+        </div>
 
-        <label className="input input-bordered flex items-center gap-2">
-          <input
-            onKeyUp={(e) => setSearch(e.target.value)}
-            type="text"
-            className="grow"
-            placeholder="Search by location"
-          />
-          <FaSearch />
-        </label>
+        <div className="flex grow items-center justify-end gap-3">
+          <label className="input input-bordered flex items-center gap-2 w-full sm:w-auto">
+            <input
+              onKeyUp={(e) => setSearch(e.target.value)}
+              type="text"
+              className="grow"
+              placeholder="Search by location"
+            />
+            <FaSearch />
+          </label>
 
-        <select
-          onChange={(e) => setFilter(e.target.value)}
-          className="select select-bordered w-full max-w-xs"
-        >
-          <option disabled>Category</option>
-          <option>Documents</option>
-          <option>Gadgets</option>
-          <option>Accessories</option>
-          <option>Vehicles</option>
-          <option>Pets</option>
-        </select>
+          <select
+            onChange={(e) => setFilter(e.target.value)}
+            className="select select-bordered sm:w-auto w-full max-w-xs"
+          >
+            <option disabled>Category</option>
+            <option>Documents</option>
+            <option>Gadgets</option>
+            <option>Accessories</option>
+            <option>Vehicles</option>
+            <option>Pets</option>
+          </select>
+        </div>
       </div>
-
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
         {items.map((item) => (
           <LatestItemsCard key={item._id} item={item} />

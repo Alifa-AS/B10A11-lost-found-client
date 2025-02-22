@@ -3,8 +3,12 @@
 ## Project Overview
 WhereIsIt is a full-stack Lost and Found website that connects individuals who have lost personal belongings with those who may have found them. Users can report lost items, browse found items, and interact to recover their belongings. This project provides practical experience in building applications, user authentication, file uploads, database management, and API integration.
 
-## Live URL
-[Live Link] 
+## Live URL 
+[Client side Live Link] - https://lost-found-client.web.app
+
+[Client side Live Link-2] - https://lost-found-client.firebaseapp.com
+
+[Server side live link] - https://lost-and-found-server-swart.vercel.app
 
 ## Key Features
 - User Authentication: Register and login using email/password or social media accounts (Google/GitHub).
@@ -33,11 +37,11 @@ WhereIsIt is a full-stack Lost and Found website that connects individuals who h
 - `cors`
 
 ## Installation
-1. Clone the repository:
+1. Clone the repository: 
    ```bash
-   git clone 
-   cd your-project-directory
-
+   git clone in client side - https://github.com/Alifa-AS/B10A11-lost-found-client.git
+   
+   git clone in server side - https://github.com/Alifa-AS/B10A11-lost-found-server.git
 
 
 

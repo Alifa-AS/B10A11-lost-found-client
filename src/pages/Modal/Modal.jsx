@@ -8,7 +8,7 @@ const Modal = () => {
 
   useEffect(() => {
     const fetchItem = async () => {
-      const response = await fetch(`http://localhost:5000/items/${id}`);
+      const response = await fetch(`https://lost-and-found-server-swart.vercel.app/items/${id}`);
       const data = await response.json();
       setItem(data);
     };

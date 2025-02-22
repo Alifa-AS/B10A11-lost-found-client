@@ -18,16 +18,16 @@ const MyPostedItems = () => {
       axiosSecure
         .get(`/items?email=${user.email}`)
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           setItems(res.data);
         })
         .catch((error) => console.error("Error fetching items:", error));
     }
   }, [user?.email]);
-  console.log(items);
+  // console.log(items);
 
   const handleDelete = (id) => {
-    console.log(id);
+    // console.log(id);
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -38,7 +38,7 @@ const MyPostedItems = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/items/${id}`, {
+        fetch(`https://lost-and-found-server-swart.vercel.app/items/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

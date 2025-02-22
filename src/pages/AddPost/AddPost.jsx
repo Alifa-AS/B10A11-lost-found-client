@@ -8,7 +8,7 @@ const AddPost = () => {
   const { id } = useParams();
   const { user } = useAuth();
   const navigate = useNavigate();
-  console.log(id, user);
+  // console.log(id, user);
 
   const [selectedDate, setSelectedDate] = useState(new Date());
   
@@ -17,7 +17,7 @@ const AddPost = () => {
 
     const formData = new FormData(e.target);
     const initialData = Object.fromEntries(formData.entries());
-    console.log(initialData);
+    // console.log(initialData);
     const newPost = {
       ...initialData, 
       contact: {
@@ -26,9 +26,9 @@ const AddPost = () => {
 
       },
     }; 
-    console.log(newPost);
+    // console.log(newPost);
 
-    fetch('http://localhost:5000/items', {
+    fetch('https://lost-and-found-server-swart.vercel.app/items', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'

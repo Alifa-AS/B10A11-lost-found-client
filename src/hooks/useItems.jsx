@@ -7,7 +7,7 @@ const useItems = (sort, search, filter) => {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/items/all?sort=${sort}&search=${search}&filter=${filter}`, {
+      .get(`https://lost-and-found-server-swart.vercel.app/items/all?sort=${sort}&search=${search}&filter=${filter}`, {
         withCredentials: true,
       })
       .then((res) => {

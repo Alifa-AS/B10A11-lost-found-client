@@ -14,8 +14,7 @@ const ItemDetails = () => {
     contact,
     status,
   } = useLoaderData();
-  console.log("Status:", status);
-  console.log("Status value:", status);
+  // console.log("Status value:", status);
 
   return (
     <div className="flex justify-center items-center min-h-screen p-6">

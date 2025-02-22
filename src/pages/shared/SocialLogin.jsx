@@ -12,12 +12,12 @@ const SocialLogin = () => {
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then((result) => {
-        console.log(result.user);
+        // console.log(result.user);
         const user = result.user;
-        console.log(user);
+        // console.log(user);
 
         axios
-          .post("http://localhost:5000/jwt", user, { withCredentials: true })
+          .post("https://lost-and-found-server-swart.vercel.app/jwt", user, { withCredentials: true })
           .then((res) => {
             console.log(res.data);
 
@@ -32,7 +32,7 @@ const SocialLogin = () => {
           });
       })
       .catch((error) => {
-        console.log(error.message);
+        // console.log(error.message);
       });
   };
 

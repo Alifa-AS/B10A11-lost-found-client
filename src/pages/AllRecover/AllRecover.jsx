@@ -8,14 +8,14 @@ const AllRecover = () => {
   const { user } = useAuth();
   const [recoverItems, setRecoverItems] = useState([]);
   const [isTableLayout, setIsTableLayout] = useState(true);
-  console.log(recoverItems);
+  // console.log(recoverItems);
 
   useEffect(() => {
     if (!user.email) return;
 
-    axios.get(`http://localhost:5000/recover?email=${user.email}`)
+    axios.get(`https://lost-and-found-server-swart.vercel.app/recover?email=${user.email}`)
     .then(res =>{
-        console.log("API Response:", res.data);
+        // console.log("API Response:", res.data);
         if (Array.isArray(res.data)) {
           setRecoverItems(res.data);
         } else {

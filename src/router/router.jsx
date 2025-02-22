@@ -30,7 +30,7 @@ const router = createBrowserRouter([
         {
           path: 'items/:id',
           element:<PrivateRoute><ItemDetails /></PrivateRoute>,
-          loader: ({params}) => fetch(`http://localhost:5000/items/${params.id}`)
+          loader: ({params}) => fetch(`https://lost-and-found-server-swart.vercel.app/items/${params.id}`)
         },
         {
           path: 'addPostItems',
@@ -51,7 +51,7 @@ const router = createBrowserRouter([
         {
           path: 'updateItems/:id',
           element: <PrivateRoute><UpdateItems /></PrivateRoute>,
-          loader: ({params}) => fetch(`http://localhost:5000/items/${params.id}`)
+          loader: ({params}) => fetch(`https://lost-and-found-server-swart.vercel.app/items/${params.id}`)
         },
         {
             path: 'register',

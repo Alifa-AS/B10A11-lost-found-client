@@ -15,7 +15,7 @@ const LatestItems = () => {
   });
 
   useEffect(() => {
-    fetch("http://localhost:5000/items/all")
+    fetch("https://lost-and-found-server-swart.vercel.app/items/all")
       .then((res) => {
         if (!res.ok) {
           throw new Error('Failed to fetch');
@@ -33,22 +33,6 @@ const LatestItems = () => {
       })
        .catch((error)=>console.error("Error Fetching:", error));
   }, []);
-
-  // useEffect(() => {
-  //   const fetchItems = async () => {
-  //     if (!user) return;
-
-  //     try {
-  //       const res = await axios.get("http://localhost:5000/items", {
-  //         // headers: {
-  //         //   Authorization: `Bearer ${accessToken}`,
-  //         // },
-  //         withCredentials: true,
-  //       });
-  //       console.log("Items Response:", res.data);
-
-  //   fetchItems();
-  // }, [user]);
 
   if (items.length === 0) {
     return (

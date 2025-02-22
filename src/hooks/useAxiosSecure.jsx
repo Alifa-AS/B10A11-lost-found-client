@@ -4,7 +4,7 @@ import useAuth from "./useAuth";
 import { useNavigate } from "react-router-dom";
 
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "https://lost-and-found-server-swart.vercel.app",
   withCredentials: true,
 });
 
@@ -18,16 +18,16 @@ const useAxiosSecure = () => {
         return response;
       },
       (error) => {
-        console.log("error caught in interceptor", error);
+        // console.log("error caught in interceptor", error);
 
         if (error.status === 401 || error.status === 403) {
-          console.log("need to logout user");
+          // console.log("need to logout user");
           signOutUser()
             .then(() => {
-              console.log("logged out user");
+              // console.log("logged out user");
               navigate('/login')
             })
-            .catch((error) => console.log(error));
+            // .catch((error) => console.log(error));
         }
         return Promise.reject(error);
       }

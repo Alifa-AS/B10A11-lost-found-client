@@ -39,7 +39,7 @@ const AuthProvider = ({ children }) => {
       console.log("User signed in:", userCredential.user);
 
       await axios.post(
-        "http://localhost:5000/jwt",
+        "https://lost-and-found-server-swart.vercel.app/jwt",
         { email },
         { withCredentials: true }
       );
@@ -70,7 +70,7 @@ const AuthProvider = ({ children }) => {
       if (currentUser?.email) {
         axios
           .post(
-            "http://localhost:5000/jwt",
+            "https://lost-and-found-server-swart.vercel.app/jwt",
             { email: currentUser.email },
             { withCredentials: true }
           )
@@ -81,7 +81,7 @@ const AuthProvider = ({ children }) => {
       } else {
         axios
           .post(
-            "http://localhost:5000/logout",
+            "https://lost-and-found-server-swart.vercel.app/logout",
             {},
             {
               withCredentials: true,
