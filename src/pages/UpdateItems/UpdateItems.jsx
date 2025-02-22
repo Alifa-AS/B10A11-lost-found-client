@@ -19,7 +19,7 @@ const UpdateItems = () => {
 
     const formData = new FormData(e.target);
     const initialData = Object.fromEntries(formData.entries());
-    // console.log(initialData);
+    // console.log("form data", initialData);
     const updatePost = {
       ...initialData,
       contact: {
@@ -127,7 +127,7 @@ const UpdateItems = () => {
               </div>
               <input
                 type="text"
-                name="image"
+                name="thumbnail"
                 placeholder="Image URL"
                 className="input input-bordered w-full"
                 defaultValue={item.thumbnail}
