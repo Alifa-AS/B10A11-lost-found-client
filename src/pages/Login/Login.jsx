@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import Lottie from "lottie-react";
 import Swal from "sweetalert2";
 import loginLottie from "../../assets/lottie/login.json";
@@ -12,11 +12,13 @@ const Login = () => {
   const { signInUser } = useContext(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
   // console.log('in login page',location);
   const from = location.state || '/';
 
   const handleLogin = (e) => {
     e.preventDefault();
+    setLoading(true);
 
     const form = e.target;
     const email = form.email.value;
@@ -26,7 +28,7 @@ const Login = () => {
 
     signInUser(email,password)
     .then(result =>{
-      console.log('Log in' , result.user.email)
+      // console.log('Log in', result.user.email)
       
       Swal.fire({
         title: "Login Successful!",
@@ -51,6 +53,9 @@ const Login = () => {
         icon: "error",
         confirmButtonText: "Try Again",
       });
+    })
+    .finally(()=>{
+      setLoading(false);
     })
   };
 
@@ -96,7 +101,9 @@ const Login = () => {
                 </label>
               </div>
               <div className="form-control mt-6">
-                <button className="btn bg-[#031e40] text-white">Login</button>
+                <button className="btn bg-[#031e40] text-white" disabled={loading}>
+                   {loading ? 'Logging in...' : 'Login'}
+                </button>
               </div>
               <div>
                 <p>

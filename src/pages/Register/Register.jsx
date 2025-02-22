@@ -16,7 +16,7 @@ const Register = () => {
     const form = e.target;
     const name = form.name.value;
     const email = form.email.value;
-    const photo = form.photo.value;
+    const photo = form.photoURL.value;
     const password = form.password.value;
     // console.log(name, email, photo, password);
 
@@ -94,9 +94,9 @@ const Register = () => {
                   <span className="label-text">Photo URL</span>
                 </label>
                 <input
-                  type="photo"
+                  type="text"
                   placeholder="Photo URL"
-                  name="photo"
+                  name="photoURL"
                   className="input input-bordered"
                   required
                 />

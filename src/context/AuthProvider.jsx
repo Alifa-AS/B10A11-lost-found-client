@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import auth from "../firebase/firebase.init";
 import axios from "axios";
@@ -22,6 +23,13 @@ const AuthProvider = ({ children }) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
+  const updateUserProfile = (user, name, photo) => {
+    return updateProfile(user, {
+      displayName: name,
+      photoURL: photo,
+    });
+  };
+
   // const signInUser = (email, password) => {
   //   setLoading(true);
   //   setAccessToken(token);
@@ -31,24 +39,21 @@ const AuthProvider = ({ children }) => {
   const signInUser = async (email, password) => {
     setLoading(true);
     try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
       console.log("User signed in:", userCredential.user);
-
-      await axios.post(
-        "https://lost-and-found-server-swart.vercel.app/jwt",
-        { email },
-        { withCredentials: true }
-      );
+  
+      // Sending email for JWT
+      await axios.post("https://lost-and-found-server-swart.vercel.app/jwt", { email }, { withCredentials: true });
+  
+      return userCredential; // Return the userCredential
     } catch (error) {
       console.error("Error signing in:", error);
+      throw error; // Rethrow the error for handling in the Login component
     } finally {
       setLoading(false);
     }
   };
+  
 
   const signInWithGoogle = () => {
     setLoading(true);
@@ -100,6 +105,7 @@ const AuthProvider = ({ children }) => {
     user,
     loading,
     createUser,
+    updateUserProfile,
     signInUser,
     signInWithGoogle,
     signOutUser,
