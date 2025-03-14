@@ -16,8 +16,8 @@ const AllItems = () => {
   }
 
   return (
-    <div>
-      <h2 className="text-center font-bold text-3xl py-10">All Items</h2>
+    <div className="pb-10">
+      <h2 className="text-center font-bold text-3xl py-10 text-blue-600">All Items</h2>
 
       <div className="w-11/12 mx-auto bg-base-200 py-5 p-3 flex flex-wrap gap-3 items-center">
         <div className="flex w-full md:w-auto md:mr-auto">
