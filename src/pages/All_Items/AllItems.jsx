@@ -17,13 +17,14 @@ const AllItems = () => {
 
   return (
     <div className="pb-10">
-      <h2 className="text-center font-bold text-3xl py-10 text-blue-600">All Items</h2>
-
+      <h2 className="text-center py-10 text-3xl font-extrabold text-blue-400 drop-shadow-lg">
+        All Lost & Found Items
+      </h2>
       <div className="w-11/12 mx-auto bg-base-200 py-5 p-3 flex flex-wrap gap-3 items-center">
         <div className="flex w-full md:w-auto md:mr-auto">
           <button
             onClick={() => setSort(!sort)}
-            className={`btn btn-neutral ${sort && "btn-success"}`}
+            className={`btn btn-info text-white ${sort && "btn-success"}`}
           >
             {sort == true ? "Sorted By Title" : "Sort By Title"}
           </button>
@@ -53,7 +54,7 @@ const AllItems = () => {
           </select>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-4 my-10">
         {items.map((item) => (
           <LatestItemsCard key={item._id} item={item} />
         ))}

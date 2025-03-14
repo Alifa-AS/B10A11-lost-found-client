@@ -11,7 +11,7 @@ const Motion = () => {
           <div className="flex-1">
             <motion.img
               src={img}
-              animate={{ y: [50, 100, 50] }}
+              animate={{ y: [40, 80, 40] }}
               transition={{ duration: 10, repeat: Infinity}}
               className="max-w-sm rounded-t-[40px] rounded-br-[40px] border-l-4 border-b-4
                border-yellow-500 lg:w-64 md:w-64 w-44 shadow-2xl"
