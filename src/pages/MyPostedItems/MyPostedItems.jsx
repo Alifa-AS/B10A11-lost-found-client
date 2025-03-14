@@ -57,9 +57,9 @@ const MyPostedItems = () => {
   };
 
   return (
-    <div>
-      <h2 className="text-3xl font-bold text-center">
-        My Posted Items: {items.length}
+    <div className="my-10">
+      <h2 className="text-center py-10 text-3xl font-extrabold text-blue-400 drop-shadow-lg">
+        My Posted Items : {items.length}
       </h2>
       {items.length === 0 ? (
         <p className="text-center text-gray-500 mt-4">No items found.</p>

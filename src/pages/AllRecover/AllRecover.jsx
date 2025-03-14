@@ -43,8 +43,8 @@ const AllRecover = () => {
 
   return (
     <div className="max-w-4xl mx-auto py-10 px-4">
-      <h2 className="text-center text-3xl font-bold py-10">
-        All Recovered Items
+      <h2 className="text-center py-10 text-3xl font-extrabold text-blue-400 drop-shadow-lg">
+        All Recover Items
       </h2>
       <div className="flex justify-between items-center mb-4">
         <p className="text-lg font-medium">Recovered: {recoverItems.length}</p>

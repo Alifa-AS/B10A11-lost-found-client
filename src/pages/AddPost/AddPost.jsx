@@ -55,8 +55,10 @@ const AddPost = () => {
 
     
   return (
-    <div className="bg-blue-50 p-24">
-      <h2 className="text-3xl font-extrabold pb-10 text-center">Add Lost & Found Items</h2>
+    <div className="bg-blue-50 p-20">
+      <h2 className="text-center pb-6 text-3xl font-extrabold text-blue-400 drop-shadow-lg">
+        Add Lost & Found Items
+      </h2>
       <form onSubmit={handleAddItems}>
         {/* items row1*/}
         <div className="md:flex mb-8">
