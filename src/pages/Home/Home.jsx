@@ -3,6 +3,7 @@ import Banner from './Banner';
 import Motion from './Motion';
 import LatestItems from './LatestItems';
 import ItemsCounter from './Items Counter/ItemsCounter';
+import Faq from './Faq/Faq';
 
 const Home = () => {
     return (
@@ -11,6 +12,7 @@ const Home = () => {
             <LatestItems />
             <Motion />
             <ItemsCounter />
+            <Faq />
         </div>
     );
 };

@@ -29,7 +29,7 @@ const PremiumClass = () => {
     <section className="my-20 text-center py-16 rounded-xl shadow-2xl">
       <div className="max-w-6xl mx-auto px-6">
         {/* Heading */}
-        <h2 className="text-4xl font-extrabold text-blue-400 drop-shadow-lg">🚀Lost & Found Services</h2>
+        <h2 className="text-3xl font-extrabold text-blue-400 drop-shadow-lg">🚀Lost & Found Services</h2>
         <p className="text-lg text-blue-300 opacity-80 mb-8">Exclusive Priority Assistance & Tracking</p>
 
         {/* Cards Grid */}
