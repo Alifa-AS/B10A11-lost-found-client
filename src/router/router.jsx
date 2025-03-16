@@ -12,6 +12,7 @@ import MyPostedItems from "../pages/MyPostedItems/MyPostedItems";
 import AllRecover from "../pages/AllRecover/AllRecover";
 import RecoverForm from "../pages/RecoverForm/RecoverForm";
 import UpdateItems from "../pages/UpdateItems/UpdateItems";
+import ContactUs from "../pages/ContactUs/ContactUs";
 
 const router = createBrowserRouter([
     {
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
           path: 'updateItems/:id',
           element: <PrivateRoute><UpdateItems /></PrivateRoute>,
           loader: ({params}) => fetch(`https://lost-and-found-server-swart.vercel.app/items/${params.id}`)
+        },
+        {
+          path: 'ContactUs',
+          element: <ContactUs />,
         },
         {
             path: 'register',

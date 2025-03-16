@@ -50,7 +50,7 @@ const LatestItems = () => {
         </h2>
 
         <h2 className="text-center min-h-[40px]">
-          <span className="font-bold text-indigo-400 text-center">
+          <span className="font-bold text-indigo-300 text-center">
             {typeEffect}
           </span>
         </h2>

@@ -4,6 +4,8 @@ import Motion from './Motion';
 import LatestItems from './LatestItems';
 import ItemsCounter from './Items Counter/ItemsCounter';
 import Faq from './Faq/Faq';
+import Review from './Review/Review';
+import Sponsor from './Sponsor/Sponsor';
 
 const Home = () => {
     return (
@@ -13,6 +15,8 @@ const Home = () => {
             <Motion />
             <ItemsCounter />
             <Faq />
+            <Review />
+            <Sponsor />
         </div>
     );
 };

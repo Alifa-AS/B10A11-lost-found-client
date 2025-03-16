@@ -8,7 +8,7 @@ const Faq = () => {
         <h2 className="text-3xl font-extrabold text-blue-400 drop-shadow-lg">
           Frequently Asked Question
         </h2>
-        <p className="text-lg text-blue-300 opacity-80 py-2 ">Ask Any Question</p>
+        <p className="text-lg text-blue-300 py-2 ">Ask Any Question</p>
       </div>
 
       <div className="space-y-4 max-w-3xl mx-auto">

@@ -13,7 +13,7 @@ const Footer = () => {
           <h6 className="footer-title">Services</h6>
           <li>
             <NavLink
-              to="/addNewCampaign"
+              to="/addPostItems"
               className={({ isActive }) =>
                 isActive ? "text-green-950 font-bold underline" : ""
               }
@@ -23,7 +23,7 @@ const Footer = () => {
           </li>
           <li>
             <NavLink
-              to="/myCampaign"
+              to="/myPostedItems"
               className={({ isActive }) =>
                 isActive ? "text-[#1c402e] font-bold underline" : ""
               }
@@ -33,12 +33,12 @@ const Footer = () => {
           </li>
           <li>
             <NavLink
-              to="/myDonations"
+              to="/contactUs"
               className={({ isActive }) =>
                 isActive ? "text-[#1c402e] font-bold underline" : ""
               }
             >
-              MyDonations
+              ContactUs
             </NavLink>
           </li>
         </ul>
@@ -56,7 +56,7 @@ const Footer = () => {
           </li>
           <li>
             <NavLink
-              to="/allCampaign"
+              to="/items/all"
               className={({ isActive }) =>
                 isActive ? "text-green-950 font-bold underline" : ""
               }
@@ -66,20 +66,20 @@ const Footer = () => {
           </li>
           <li>
             <NavLink
-              to="/users"
+              to="/allRecover"
               className={({ isActive }) =>
                 isActive ? "text-[#1c402e] font-bold underline" : ""
               }
             >
-              All Users
+              All Recover
             </NavLink>
           </li>
         </ul>
         <nav>
-          <h6 className="footer-title">Legal</h6>
-          <a className="link link-hover">Terms of use</a>
-          <a className="link link-hover">Privacy policy</a>
-          <a className="link link-hover">Cookie policy</a>
+          <h6 className="footer-title">Contact</h6>
+          <a className="link link-hover">info@gmail.com</a>
+          <a className="link link-hover">+880 1712 938567</a>
+          <a className="link link-hover">Dhaka,Bangladesh</a>
         </nav>
       </footer>
       <footer className="footer bg-base-200 text-base-content border-base-300 border-t px-10 py-2">
@@ -99,10 +99,10 @@ const Footer = () => {
             <a href="https://www.youtube.com/">
               <FaYoutube className="text-red-600 text-2xl" />
             </a>
-            <a>
+            <a href="https://www.instagram.com/">
               <FaInstagram className="text-purple-500 text-2xl"></FaInstagram>
             </a>
-            <a>
+            <a href="https://www.instagram.com/">
               <FaXTwitter className="text-black text-2xl" />
             </a>
           </div>

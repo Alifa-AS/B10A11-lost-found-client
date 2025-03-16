@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "Sarah Johnson",
+    "image": "https://i.ibb.co.com/YTjjwRXG/41b52a558b662a35edd420cf12f0358b.jpg",
+    "review": "Lost my phone at the airport and found it here! Amazing service!",
+    "rating": 5,
+    "profession": "Frequent Traveler"
+  },
+  {
+    "id": 2,
+    "name": "James Carter",
+    "image": "https://i.ibb.co.com/LSmdN2r/3044f47175b29502bec376c90fdd11b0.jpg",
+    "review": "I never thought I'd get back my lost watch. Thank you so much!",
+    "rating": 4,
+    "profession": "Bank Manager"
+  },
+  {
+    "id": 3,
+    "name": "Emily Watson",
+    "image": "https://i.ibb.co.com/3SHVzc4/360-F-7C.jpg",
+    "review": "Fast and reliable! Found my lost bag within hours.",
+    "rating": 5,
+    "profession": "College Student"
+  },
+  {
+    "id": 4,
+    "name": "Robert Wilson",
+    "image": "https://i.ibb.co.com/KmTLZbb/c19e67449441bf09cddc49c35ec7cc37.jpg",
+    "review": "Customer service is excellent. They really care about people.",
+    "rating": 4,
+    "profession": "Software Engineer"
+  },
+  {
+    "id": 5,
+    "name": "Linda Brown",
+    "image": "https://i.ibb.co.com/r0wBJcz/0c5160245e7b32c95fae68c9b207c220.jpg",
+    "review": "This platform is a lifesaver! Got my missing cat back.",
+    "rating": 5,
+    "profession": "Pet Lover"
+  },
+  {
+    "id": 6,
+    "name": "Michael Adams",
+    "image": "https://i.ibb.co.com/kV1zJkzJ/2942cb8351450399b32147c9504bde64.jpg",
+    "review": "Lost my wallet at a restaurant. Thanks to this service, I got it back.",
+    "rating": 4,
+    "profession": "Businessman"
+  },
+  {
+    "id": 7,
+    "name": "Sophia Martinez",
+    "image": "https://i.ibb.co.com/NjkLp59/testimonial-blog-post.jpg",
+    "review": "Such a wonderful service! Found my lost jewelry within a day.",
+    "rating": 5,
+    "profession": "Fashion Designer"
+  }
+]

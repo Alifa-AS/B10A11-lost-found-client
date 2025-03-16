@@ -30,7 +30,7 @@ const PremiumClass = () => {
       <div className="max-w-6xl mx-auto px-6">
         {/* Heading */}
         <h2 className="text-3xl font-extrabold text-blue-400 drop-shadow-lg">🚀Lost & Found Services</h2>
-        <p className="text-lg text-blue-300 opacity-80 mb-8">Exclusive Priority Assistance & Tracking</p>
+        <p className="text-lg text-blue-300 mb-10">Exclusive Priority Assistance & Tracking</p>
 
         {/* Cards Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
